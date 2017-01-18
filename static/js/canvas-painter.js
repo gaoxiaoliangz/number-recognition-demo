@@ -147,7 +147,7 @@
       var speed = (pointData.x[pointData.x.length - 1] - pointData.x[pointData.x.length - 2]) / (pointData.ms[pointData.ms.length - 1] - pointData.ms[pointData.ms.length - 2]);
       speed = Math.abs(speed);
 
-      var circle_r = 20 - 15 * (speed / (speed + 1));
+      var circle_r = 10 - 10 * (speed / (speed + 1));
       pointData.r.push(circle_r);
 
       // fill path

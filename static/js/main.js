@@ -1,5 +1,3 @@
-var pad = CanvasPainter(document.querySelector('#pad'));
-
 var store = {}
 
 var Home = (children) => {
@@ -26,9 +24,18 @@ var Button = (text, onClick) => {
   `
 }
 
+var Canvas = () => {
+  return `
+    <div class="canvas-wrap">
+      <canvas id="pad" width="800" height="500"></canvas>
+    </div>
+  `
+}
+
 var Page = (store) => Root(Container(Home(
   `
-    <h1>this is home</h1>
+    <h1>recog number</h1>
+    ${Canvas()}
     <p>you clicked ${store.count}</p>
     ${Button('change', 'store.count = store.count + 1;console.log(store);updateView()')}
   `
@@ -36,11 +43,11 @@ var Page = (store) => Root(Container(Home(
 
 function render(el, dom) {
   el.innerHTML = dom
+  var pad = CanvasPainter(document.querySelector('#pad'))
 }
 
 // init
 store.count = 1
-
 
 function updateView() {
   render(document.querySelector('#root'), Page(store))
