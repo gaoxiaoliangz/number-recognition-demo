@@ -1,0 +1,15 @@
+h1 {
+  font-size: 15px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.canvas-wrap {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.canvas-wrap canvas {
+  margin: 20px 0;
+  border: 1px solid #ddd;
+}
