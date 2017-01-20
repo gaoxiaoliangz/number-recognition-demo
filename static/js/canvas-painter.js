@@ -6,7 +6,6 @@
     return 'ontouchstart' in window      // works on most browsers 
       || navigator.maxTouchPoints;       // works on IE10/11 and Surface
   }
-
   function CanvasPainter(canvasDom) {
     // todo: validate if element is canvas
     this._canvas = canvasDom;
@@ -190,4 +189,9 @@
   global.CanvasPainter = (canvasDom) => {
     return new CanvasPainter(canvasDom);
   };
+
 } (window));
+
+var CanvasPainter = window.CanvasPainter;
+
+export default CanvasPainter;

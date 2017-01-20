@@ -1,3 +1,6 @@
+import hello from './hello.js'
+import CanvasPainter from './canvas-painter.js'
+
 var store = {}
 
 var Home = (children) => {
