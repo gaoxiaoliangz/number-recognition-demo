@@ -1,4 +1,3 @@
-import hello from './hello.js'
 import CanvasPainter from './canvas-painter.js'
 
 var store = {}
@@ -41,6 +40,7 @@ var Page = (store) => Root(Container(Home(
     ${Canvas()}
     <p>you clicked ${store.count}</p>
     ${Button('change', 'store.count = store.count + 1;console.log(store);updateView()')}
+    <button class="btn js-save">save</button>
   `
 )))
 
@@ -54,6 +54,7 @@ store.count = 1
 
 function updateView() {
   render(document.querySelector('#root'), Page(store))
+  // window.addEventListener
 }
 
 updateView()

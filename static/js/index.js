@@ -1,12 +1,12 @@
 // set our baseURL reference path
 SystemJS.config({
   baseURL: '../static/js',
-  packages: {
-    hello: {
-      main: './hello.js',
-      defaultExtension: 'js'
-    },
-  },
+  // packages: {
+  //   hello: {
+  //     main: './hello.js',
+  //     defaultExtension: 'js'
+  //   },
+  // },
   transpilerRuntime: false,
   // map: {
   //   'plugin-traceur': '../node_modules/systemjs-plugin-traceur/plugin-traceur.js',
@@ -34,4 +34,4 @@ SystemJS.config({
 });
 
 // loads /js/main.js
-SystemJS.import('main.js');
+SystemJS.import('main2.js');

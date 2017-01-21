@@ -183,14 +183,24 @@
         }
       }
       event.preventDefault();
-    }
+    },
+
+    // todo
+    // clear() {
+    //   this._pointData = {
+    //     x: [],
+    //     y: [],
+    //     r: [],
+    //     ms: []
+    //   }
+    // }
   }
 
   global.CanvasPainter = (canvasDom) => {
     return new CanvasPainter(canvasDom);
   };
 
-} (window));
+}(window));
 
 var CanvasPainter = window.CanvasPainter;
 
