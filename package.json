@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "export FLASK_APP=main.py; export FLASK_DEBUG=1; python3 -m flask run"
+    "start": "export FLASK_APP=main.py; export FLASK_DEBUG=1; flask run"
   },
   "repository": {
     "type": "git",
