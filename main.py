@@ -1,19 +1,15 @@
 """server"""
+from tensorflow.examples.tutorials.mnist import input_data
+mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 import base64
 import io
 import os
 import numpy as np
+import tensorflow as tf
 # import numpy
 from flask import Flask, jsonify, render_template, request, url_for
 
 from PIL import Image, ImageFilter
-
-app = Flask(__name__)
-
-# strg = "thinking about "
-# @app.route("/<string:name>")
-# def move(name):
-#   return strg + name
 
 
 
@@ -35,7 +31,71 @@ def print_image(raw_image_data):
         print(" ", end="")
 
 
+### tf start
+## init
 
+# placeholders
+x = tf.placeholder(tf.float32, [None, 784])
+y_ = tf.placeholder(tf.float32, [None, 10])
+
+# variables
+W = tf.Variable(tf.zeros([784, 10]), name='Weight') # weight
+b = tf.Variable(tf.zeros([10])) # bias
+
+# the model
+y = tf.nn.softmax(tf.matmul(x, W) + b)
+
+init = tf.global_variables_initializer()
+sess = tf.Session()
+sess.run(init)
+
+def train():
+  print('start training ...')
+  cross_entropy = tf.reduce_mean(-tf.reduce_sum(
+      y_ * tf.log(y), reduction_indices=[1]))
+
+  train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
+
+  for i in range(1000):
+    batch_xs, batch_ys = mnist.train.next_batch(100)
+    sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys})
+
+  print('end training')
+
+
+def test_image(raw_image):
+  """test images"""
+
+  # raw_image_32 = [float(raw_image_p) for raw_image_p in raw_image]
+  raw_image_32 = [np.float(raw_image_p) for raw_image_p in raw_image]
+  np_img = np.array(raw_image_32)
+  print(np.shape(np_img))
+  # print_image(np_img)
+  # print(np_img)
+  # print(len(np_img))
+  # print(type(np_img))
+  print(type(np_img[0]))
+
+  t_image = tf.pack([np_img], name='test_image')
+  result = tf.nn.softmax(tf.matmul(t_image, W) + b)
+  final_result = tf.argmax(result, 1)
+  py_res = sess.run(final_result)[0]
+
+  # print("number is: ", end="")
+  # print()
+  # print("---")
+  return py_res
+
+## tf end
+
+app = Flask(__name__)
+# print('wtf')
+train()
+
+# strg = "thinking about "
+# @app.route("/<string:name>")
+# def move(name):
+#   return strg + name
 
 @app.route('/')
 def index():
@@ -60,7 +120,7 @@ def upload_img():
       img_arr.append(pix_l)
 
 
-  print_image(img_arr)
+  num = test_image(img_arr)
 
 
 
@@ -95,7 +155,8 @@ def upload_img():
   # leniyimg.write(imgData)
   # leniyimg.close()
 
-  return jsonify(ok=1)
+  return jsonify(ok=1, num=num)
 
 if __name__ == '__main__':
+  # train()
   app.run()
