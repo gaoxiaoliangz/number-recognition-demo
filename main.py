@@ -83,7 +83,7 @@ def index():
   return render_template('index.html', title='recog number')
 
 
-@app.route('/upload', methods=['POST'])
+@app.route('/recog', methods=['POST'])
 def upload_img():
   img_str = request.form['img'][22:]
   img_data = base64.b64decode(img_str)
@@ -97,6 +97,7 @@ def upload_img():
       pix_l = img_pix[index_a, index_b][3]/255
       img_arr.append(pix_l)
 
+  print_image(img_arr)
   num = test_image(img_arr)
   num = num.astype(np.float)
 
