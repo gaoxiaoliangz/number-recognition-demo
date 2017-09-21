@@ -1,4 +1,4 @@
-# number-recognition-ai-demo
+# number-recognition
  
 ![](num_rec_demo.gif)
  
