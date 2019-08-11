@@ -1,4 +1,4 @@
-# number-recognition
+# number-recognition-app
  
 ![](num_rec_demo.gif)
  
